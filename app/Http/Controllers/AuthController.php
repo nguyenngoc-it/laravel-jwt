@@ -32,6 +32,7 @@ class AuthController extends Controller
 
     public function register(Request $request): \Illuminate\Http\JsonResponse
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
@@ -42,9 +43,11 @@ class AuthController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
+       $path= $request->file('image')->store('imgs','public');
+
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['password' => bcrypt($request->password), 'image'=>$path]
         ));
 
         return response()->json([
