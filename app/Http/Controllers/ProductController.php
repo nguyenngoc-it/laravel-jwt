@@ -37,12 +37,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $path= $request->file('image')->store('images','public');
+//        $path= $request->file('image')->store('images','public');
         $product= new Product();
         $product->name= $request->name;
         $product->price= $request->price;
         $product->description= $request->description;
-        $product->image= $path;
+//        $product->image= $path;
         $product->save();
 
 
@@ -79,12 +79,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $path= $request->file('image')->store('images','public');
+//        $path= $request->file('image')->store('images','public');
         $product= Product::findOrFail($id);
         $product->name= $request->name;
         $product->price= $request->price;
         $product->description= $request->description;
-        $product->image= $path;
+//        $product->image= $path;
         $product->save();
 
     }
