@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,13 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+});
+Route::group([
+    'middleware'=>'api',
+    'prefix'=>'product'
+],function ($router){
+    Route::get('/list-product',[ProductController::class,'index']);
+    Route::post('/create-product',[ProductController::class,'store']);
+    Route::post('{id}/update-product',[ProductController::class,'update']);
+    Route::get('{id}/delete-product',[ProductController::class,'destroy']);
 });
