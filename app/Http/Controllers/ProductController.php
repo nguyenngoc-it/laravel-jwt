@@ -101,7 +101,11 @@ class ProductController extends Controller
     {
         $product= Product::find($id);
         $product->delete();
-        return response('message: delete success')->json();
+        $data= [
+       'message'=>'delete success',
+            'users'=>Product::all()
+        ];
 
+        return  response()->json($data);
     }
 }
