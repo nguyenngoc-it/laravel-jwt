@@ -101,7 +101,7 @@ class ProductController extends Controller
     {
         $product= Product::find($id);
         $product->delete();
-        return response('message: delete success');
+        return response('message: delete success')->json();
 
     }
 }
